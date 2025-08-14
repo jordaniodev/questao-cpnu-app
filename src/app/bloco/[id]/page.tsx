@@ -1,10 +1,8 @@
 export const dynamic = "force-dynamic";
 
-import { BlocoPageProps } from "./page.typs";
-import { fetchPrivateServer } from "@/lib/fetchPrivateServer";
+import { BlocoPageProps } from "./page.type";
+
 import { Block } from "@/types/Block";
-import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card";
-import { ChevronRight } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ChoiceTopics } from "./(components)/ChoiceTopic";
 import { Topic } from "@/types/Topic";
@@ -14,9 +12,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { QuestionByBlock } from "./(components)/QuestionByBlock";
 
 
-
-
-export default async function BlocoPage({ params }: BlocoPageProps) {
+export default async function BlocoPage({ params }: BlocoPageProps) {   
     const resolvedParams = await params;
     const { id } = resolvedParams;
 

@@ -1,17 +1,16 @@
-
 import { fetchPrivateServer } from "@/lib/fetchPrivateServer";
 import { Question as QuestionComponent } from "./(component)/Question";
 import { Question } from "@/types/Question";
 
 interface QuestaoPageProps {
-    params: {
+    params: Promise<{
         id: string;
-    }
+    }>;
 }
 
 export default async function Page({ params }: QuestaoPageProps) {
-
-    const question = await fetchPrivateServer<Question>(`question/${params.id}`, {
+    const resolvedParams = await params;
+    const question = await fetchPrivateServer<Question>(`question/${resolvedParams.id}`, {
         next: { revalidate: 60 * 60 * 24 * 30 }
     });
     
