@@ -7,12 +7,14 @@ import { BookCheck, CircleCheck, CircleOff } from "lucide-react";
 import { useState } from "react";
 import { Alternative } from "@/types/Alternative";
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 
 
 
 export const Question = ({ question }: QuestionProps) => {
+    // const { get } = useSearchParams();
+    // const queryType = get("choiceType");
 
     const fetchPrivateClient = usePrivateFetch();
     const [alternativeSelected, setAlternativeSelected] = useState<Alternative | null>(null);

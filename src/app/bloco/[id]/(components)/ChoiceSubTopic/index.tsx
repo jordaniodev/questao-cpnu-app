@@ -29,7 +29,7 @@ export const ChoiceSubTopics = ({ topics }: ChoiceTopicProps) => {
             next: { revalidate: 60 * 60 * 24 * 30 }
         });
 
-        push(`/questao/${response.id}`);
+        push(`/questao/${response.id}?choiceType=subtopic`);
 
     }
 
@@ -83,7 +83,7 @@ export const ChoiceSubTopics = ({ topics }: ChoiceTopicProps) => {
                                 <span className="text-base-muted-foreground text-sm font-bold leading-tight">{topic.name}</span>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 w-full gap-4">
                                     {topic.subtopics.map(subTopic => (
-                                        <Card key={subTopic.id} className="cursor-pointer" onClick={() => handleDrawQuestions(topic.id)}>
+                                        <Card key={subTopic.id} className="cursor-pointer" onClick={() => handleDrawQuestions(subTopic.id)}>
                                             <CardContent>
                                                 <CardTitle className="flex items-center justify-between">
                                                     <h3 className="flex items-center justify-between text-[12px] leading-[16px]">{subTopic.name}</h3>

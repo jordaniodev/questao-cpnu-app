@@ -36,7 +36,7 @@ export const ChoiceTopics = ({ topics }: ChoiceTopicProps) => {
             next: { revalidate: 60 * 60 * 24 * 30 }
         });
 
-        push(`/questao/${response.id}`);
+        push(`/questao/${response.id}?choiceType=topic`);
         
     }
 

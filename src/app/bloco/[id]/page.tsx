@@ -10,6 +10,10 @@ import { ChoiceTopics } from "./(components)/ChoiceTopic";
 import { Topic } from "@/types/Topic";
 import { ChoiceSubTopics } from "./(components)/ChoiceSubTopic";
 import { fetchPublicServer } from "@/lib/fetchPublic";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { QuestionByBlock } from "./(components)/QuestionByBlock";
+
+
 
 
 export default async function BlocoPage({ params }: BlocoPageProps) {
@@ -32,16 +36,7 @@ export default async function BlocoPage({ params }: BlocoPageProps) {
             </div>
         </div>
         <div className="flex max-w-[800px] flex-col mx-auto mt-[48px] gap-[24px] px-[16px]">
-            <Card>
-                <CardContent>
-                    <CardTitle className="flex items-center justify-between">
-                        <h3>Questões aleatórias do bloco 1</h3>
-                        <CardAction>
-                            <ChevronRight />
-                        </CardAction>
-                    </CardTitle>
-                </CardContent>
-            </Card>
+            <QuestionByBlock bloco={bloco} />
             <div className="flex flex-col">
                 <h2 className="text-foreground text-2xl font-bold">Escolha o tema ou eixo</h2>
                 <h3 className="text-muted-foreground text-sm font-medium">Qual tema você deseja testar seus conhecimentos?</h3>
@@ -49,7 +44,14 @@ export default async function BlocoPage({ params }: BlocoPageProps) {
             <Tabs className="w-full flex flex-col items-center" defaultValue="eixos">
                 <TabsList className="w-full justify-center">
                     <TabsTrigger value={'eixos'}>Eixos</TabsTrigger>
-                    <TabsTrigger value={'temas'}>Temas</TabsTrigger>
+                    <Tooltip >
+                        <TooltipTrigger className="flex-1">
+                            <TabsTrigger  value={'temas'} disabled={true}>Temas</TabsTrigger>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Em Breve</p>
+                        </TooltipContent>
+                    </Tooltip>
                 </TabsList>
                 <TabsContent value="eixos" className="w-full mt-[1rem]">
                     <ChoiceTopics topics={topics} />
