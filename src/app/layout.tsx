@@ -1,11 +1,6 @@
 import { type Metadata } from 'next'
 import {
   ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
 } from '@clerk/nextjs'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
@@ -25,6 +20,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Questões CPNU',
   description: 'Prepare-se para o sucesso no seu próximo exame com Questões CPNU.',
+   icons: {
+    icon: '/favicon.png',
+    apple: '/apple-touch-72x72.png',
+    shortcut: '/favicon-32x32.png',
+  },
 }
 
 export default function RootLayout({
