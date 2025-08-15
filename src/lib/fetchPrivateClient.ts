@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@clerk/nextjs";
+import { redirect } from "next/navigation";
 
 export function usePrivateFetch() {
   const { getToken, isLoaded, isSignedIn } = useAuth();
@@ -10,7 +11,7 @@ export function usePrivateFetch() {
     options: RequestInit = {}
   ): Promise<T> {
     if (!isLoaded || !isSignedIn) {
-      throw new Error("Not authenticated");
+      redirect("/login");
     }
 
     const token = await getToken({ template: "questoes_cpnu" });

@@ -1,10 +1,10 @@
 'use client';
 
-import { ChevronRight, SearchIcon } from "lucide-react";
+import { ChevronRight, LoaderCircle, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card";
 import { ChoiceTopicProps } from "./index.type";
-import React from "react";
+import React, { useState } from "react";
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
 import { Question } from "@/types/Question";
 import { useRouter } from 'next/navigation'
@@ -14,6 +14,7 @@ export const ChoiceTopics = ({ topics }: ChoiceTopicProps) => {
     const [search, setSearch] = React.useState("");
     const fetchPrivate = usePrivateFetch();
     const {push} = useRouter();
+    const [isLoadingTopicId, setIsLoadingTopicId] = useState<number>(0);
 
     function normalizeText(text: string) {
         return text
@@ -31,13 +32,15 @@ export const ChoiceTopics = ({ topics }: ChoiceTopicProps) => {
 
 
     const handleDrawQuestions = async (topicId: number) => {
+        setIsLoadingTopicId(topicId)
         const response = await fetchPrivate<Question>(`question/draw/topic/${topicId}`, {
             method: 'GET',
             next: { revalidate: 60 * 60 * 24 * 30 }
         });
 
         push(`/questao/${response.id}?choiceType=topic`);
-        
+        setIsLoadingTopicId(0);
+
     }
 
     return <div className="flex flex-col gap-[1rem] w-full">
@@ -64,7 +67,7 @@ export const ChoiceTopics = ({ topics }: ChoiceTopicProps) => {
                         <CardTitle className="flex items-center justify-between">
                             <h3 className="flex items-center justify-between text-[12px] leading-[16px]">{topic.name}</h3>
                             <CardAction>
-                                <ChevronRight />
+                                {isLoadingTopicId === topic.id ? <LoaderCircle className="animate-spin" /> : <ChevronRight />}
                             </CardAction>
                         </CardTitle>
                     </CardContent>

@@ -3,22 +3,18 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { QuestionProps } from "./index.type";
 import { Button } from "@/components/ui/button";
-import { BookCheck, CircleCheck, CircleOff } from "lucide-react";
+import { BookCheck, CircleCheck, CircleOff, LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import { Alternative } from "@/types/Alternative";
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 
-
-
 export const Question = ({ question }: QuestionProps) => {
-    // const { get } = useSearchParams();
-    // const queryType = get("choiceType");
-
     const fetchPrivateClient = usePrivateFetch();
     const [alternativeSelected, setAlternativeSelected] = useState<Alternative | null>(null);
     const router = useRouter();
+    const [isLoading, setIsLoading] = useState(false);
     const choiceAlternative = async (alternative: Alternative) => {
 
         if (alternativeSelected) return;
@@ -33,8 +29,14 @@ export const Question = ({ question }: QuestionProps) => {
 
     const continuarHandle = async () => {
         if (!alternativeSelected) return;
-        const newQuestion = await fetchPrivateClient<{ id: number }>(`question/draw/topic/${question.topicId}`);
-        router.replace(`/questao/${newQuestion.id}`);
+        setIsLoading(true);
+        const choiceType = typeof window !== "undefined"
+            ? new URLSearchParams(window.location.search).get("choiceType") ?? 'block'
+            : 'block';
+
+        const newQuestion = await fetchPrivateClient<{ id: number }>(`question/draw/${choiceType}/${question.topicId}`);
+        router.replace(`/questao/${newQuestion.id}?choiceType=${choiceType}`);
+        setIsLoading(false);
     }
 
     const classWrong = " border-red-600 border bg-red-50 text-red-600 font-bold";
@@ -82,9 +84,11 @@ export const Question = ({ question }: QuestionProps) => {
                             <Button
                                 className={"min-w-[120px] w-full sm:w-auto" + (alternativeSelected === null ? " bg-gray-200 text-gray-500 cursor-not-allowed" : (alternativeSelected.correctAnswer ? " bg-emerald-500" : " bg-red-600"))}
                                 onClick={continuarHandle}
-                                disabled={alternativeSelected === null}
+                                disabled={alternativeSelected === null || isLoading}
+                                
                             >
-                                Próxima Questão
+                                {isLoading ? <LoaderCircle className="animate-spin" /> : "Próxima Questão"}
+
                             </Button>
                         </div>
                     </footer>

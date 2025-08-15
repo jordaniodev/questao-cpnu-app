@@ -1,18 +1,23 @@
 'use client';
 import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card"
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
-import { fetchPrivateServer } from "@/lib/fetchPrivateServer";
 import { Block } from "@/types/Block";
 import { ChevronRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export const QuestionByBlock = ({ bloco }: { bloco: Block }) => {
 
     const fetchClient = usePrivateFetch();
 
+    const {push} = useRouter();
+
     const handleDrawQuestionsByBlock = async () => {
-        const response = await fetchClient(`/question/draw-by-block/${bloco.id}`, {
+        const response = await fetchClient<{ id: number }>(`/question/draw-by-block/${bloco.id}`, {
             method: 'POST'
         });
+
+
+        push(`/questao/${response.id}?choiceType=block`);
     }
 
     return (
