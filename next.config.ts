@@ -9,7 +9,7 @@ const withPWA = withPWAInit({
   disable: process.env.NODE_ENV === "development", // desativa no dev
 });
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   reactStrictMode: true,
   // se usar App Router, pode manter configs aqui
   // experimental: { typedRoutes: true },
