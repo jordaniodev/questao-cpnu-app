@@ -21,9 +21,11 @@ export const PaymentModal = () => {
                     <span className="line-through text-foreground text-sm font-normal leading-none">R$ 17,99 <span className="line-through text-muted-foreground text-sm font-normal  leading-none">/Mês</span></span>
                     <span className="text-emerald-500 font-bold text-3xl font-normal leading-9">R$ 3,99 <span className="text-muted-foreground text-xl font-normal leading-tight">/Mês*</span></span>
                 </div>
-                <Button variant="default" className="w-full bg-emerald-500 hover:bg-emerald-500">
-                    Assinar agora
-                </Button>
+                <a href="https://pay.hotmart.com/D101567697R?bid=1756692864099" target="_blank">
+                    <Button variant="default" className="w-full bg-emerald-500 hover:bg-emerald-500">
+                        Assinar agora
+                    </Button>
+                </a>
             </div>
             <p className="text-foreground text-xs font-normal">*Ao aceitar a promoção, cobraremos R$ 47,88 por ano a partir da data da assinatura.</p>
             </DialogContent>
