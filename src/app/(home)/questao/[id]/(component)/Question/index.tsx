@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { useAuth } from "@clerk/nextjs";
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook";
-import { Question as QuestionType } from "@/types/Question";
+import { Question, Question as QuestionType } from "@/types/Question";
 import { Ads } from "@/types/Ads";
 import { AdsModal } from "../AdsModal";
 
@@ -22,7 +22,7 @@ export const Question = ({ question }: QuestionProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [alternativeWasConfirmed, setAlternativeWasConfirmed] = useState(false);
     const searchParams = useSearchParams();
-
+    const [newQuestion, setNewQuestion] = useState<Question>();
     const alternativeWasSelected = useMemo(() => !!alternativeSelected, [alternativeSelected]);
     const tipoQuestao = searchParams.get('tipoQuestao') ?? 'question';
     const [ads, setAds] = useState<Ads>();
@@ -94,6 +94,7 @@ export const Question = ({ question }: QuestionProps) => {
 
         if(newQuestion.ads){
             setAds(newQuestion.ads);
+            setNewQuestion(newQuestion.question);
         }else {
             router.replace(`/questao/${newQuestion.question.id}?choiceType=${choiceType}&tipoQuestao=${tipoQuestao}`);
         }
@@ -188,6 +189,6 @@ export const Question = ({ question }: QuestionProps) => {
                 </DrawerContent>
             </Drawer>
 
-            {ads && <AdsModal ads={ads} />}
+            {ads && newQuestion && <AdsModal question={newQuestion} ads={ads} />}
         </>)
 }
