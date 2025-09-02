@@ -21,9 +21,9 @@ export default async function Home() {
       </div>
       <div className="w-full overflow-x-auto">
         <div className="flex flex-col gap-[12px] pb-[40px]">
-          {blocks.data.map((block) => (
-            <Link href={`/escolha-tipo/${block.id}`} className="w-full">
-              <Card key={block.id} className="w-full  p-[16px]">
+          {blocks.data.map((block, index) => (
+            <Link href={`/escolha-tipo/${block.id}`} className="w-full" key={block.id}>
+              <Card className="w-full  p-[16px]">
                 <CardContent className="gap-[12px] flex px-0">
                   <img src={`images/icons/${block.id}.svg`} alt="" width={40} />
                   <div className="flex flex-col">
