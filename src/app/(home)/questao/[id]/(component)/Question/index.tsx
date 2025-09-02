@@ -11,7 +11,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from "@/components/ui/drawer";
 import { useAuth } from "@clerk/nextjs";
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook";
-import { Question, Question as QuestionType } from "@/types/Question";
+import { Question as QuestionType } from "@/types/Question";
 import { Ads } from "@/types/Ads";
 import { AdsModal } from "../AdsModal";
 
@@ -22,7 +22,7 @@ export const Question = ({ question }: QuestionProps) => {
     const [isLoading, setIsLoading] = useState(false);
     const [alternativeWasConfirmed, setAlternativeWasConfirmed] = useState(false);
     const searchParams = useSearchParams();
-    const [newQuestion, setNewQuestion] = useState<Question>();
+    const [newQuestion, setNewQuestion] = useState<QuestionType>();
     const alternativeWasSelected = useMemo(() => !!alternativeSelected, [alternativeSelected]);
     const tipoQuestao = searchParams.get('tipoQuestao') ?? 'question';
     const [ads, setAds] = useState<Ads>();
