@@ -1,7 +1,9 @@
 'use client';
 import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card"
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
+import { Ads } from "@/types/Ads";
 import { Block } from "@/types/Block";
+import { Question } from "@/types/Question";
 import { ChevronRight } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -16,11 +18,11 @@ export const QuestionByBlock = ({ bloco }: { bloco: Block }) => {
     const { push } = useRouter();
 
     const handleDrawQuestionsByBlock = async () => {
-        const response = await fetchClient<{ id: number }>(`question/draw/block/${bloco.id}?questionType=${tipoQuestao}`, {
-            method: 'POST'
+        const response = await fetchClient<{ question: Question, ads: Ads }>(`question/draw/block/${bloco.id}?questionType=${tipoQuestao}`, {
+            method: 'GET'
         });
 
-        push(`/questao/${response.id}?choiceType=block&tipoQuestao=${tipoQuestao}`);
+        push(`/questao/${response.question.id}?choiceType=block&tipoQuestao=${tipoQuestao}`);
     }
 
     return (

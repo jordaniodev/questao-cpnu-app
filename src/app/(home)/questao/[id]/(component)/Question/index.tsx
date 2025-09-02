@@ -13,6 +13,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook";
 import { Question as QuestionType } from "@/types/Question";
 import { Ads } from "@/types/Ads";
+import { AdsModal } from "../AdsModal";
 
 export const Question = ({ question }: QuestionProps) => {
     const fetchPrivateClient = usePrivateFetch();
@@ -24,6 +25,7 @@ export const Question = ({ question }: QuestionProps) => {
 
     const alternativeWasSelected = useMemo(() => !!alternativeSelected, [alternativeSelected]);
     const tipoQuestao = searchParams.get('tipoQuestao') ?? 'question';
+    const [ads, setAds] = useState<Ads>();
 
     const choiceAlternative = async (alternative: Alternative) => {
         if(!alternativeWasConfirmed)
@@ -87,8 +89,14 @@ export const Question = ({ question }: QuestionProps) => {
             ? new URLSearchParams(window.location.search).get("choiceType") ?? 'block'
             : 'block';
 
-        const newQuestion = await fetchPrivateClient<{ question: QuestionType, ads?: Ads }>(`question/draw/${choiceType}/${question.topicId}?questionType=${tipoQuestao}`);
-        router.replace(`/questao/${newQuestion.question.id}?choiceType=${choiceType}&tipoQuestao=${tipoQuestao}`);
+        const topicId = choiceType === 'block' ? question.topic.block.id : question.topicId;
+        const newQuestion = await fetchPrivateClient<{ question: QuestionType, ads?: Ads }>(`question/draw/${choiceType}/${topicId}?questionType=${tipoQuestao}`);
+
+        if(newQuestion.ads){
+            setAds(newQuestion.ads);
+        }else {
+            router.replace(`/questao/${newQuestion.question.id}?choiceType=${choiceType}&tipoQuestao=${tipoQuestao}`);
+        }
 
     }
 
@@ -179,5 +187,7 @@ export const Question = ({ question }: QuestionProps) => {
                     </DrawerHeader>
                 </DrawerContent>
             </Drawer>
+
+            {ads && <AdsModal ads={ads} />}
         </>)
 }

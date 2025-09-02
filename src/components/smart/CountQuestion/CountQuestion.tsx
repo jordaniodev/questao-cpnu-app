@@ -4,41 +4,42 @@ import { usePrivateFetch } from "@/lib/fetchPrivateClient";
 import { useEffect, useState } from "react";
 
 export const CountQuestion = () => {
-    const fetchPrivateClient = usePrivateFetch();
-    const [count, setCount] = useState(0);
+    // const fetchPrivateClient = usePrivateFetch();
+    // const [count, setCount] = useState(0);
 
-    useEffect(() => {
-        const handleRequest = async () => {
-            const { count: questionAnswered } = await fetchPrivateClient<{ count: number }>(`users/questions-answered-today-count`)
-            setCount(questionAnswered);
-        };
+    // useEffect(() => {
+    //     const handleRequest = async () => {
+    //         const { count: questionAnswered } = await fetchPrivateClient<{ count: number }>(`users/questions-answered-today-count`)
+    //         setCount(questionAnswered);
+    //     };
 
-        const originalFetch = window.fetch;
-        window.fetch = async (...args) => {
-            const [input, init] = args as any;
-            const url = typeof input === "string" ? input : input.url;
-            const method = (init?.method || "GET").toUpperCase();
+    //     const originalFetch = window.fetch;
+    //     window.fetch = async (...args) => {
+    //         const [input, init] = args as any;
+    //         const url = typeof input === "string" ? input : input.url;
+    //         const method = (init?.method || "GET").toUpperCase();
 
-            const response = await originalFetch.apply(window, args);
+    //         const response = await originalFetch.apply(window, args);
 
-            if (
-                method === "POST" &&
-                url.includes("question/answer")
-            ) {
-                handleRequest();
-            }
+    //         if (
+    //             method === "POST" &&
+    //             url.includes("question/answer")
+    //         ) {
+    //             handleRequest();
+    //         }
 
-            return response;
-        };
+    //         return response;
+    //     };
 
-        handleRequest();
+    //     handleRequest();
 
-        return () => {
-            window.fetch = originalFetch;
-        };
-    }, [fetchPrivateClient])
+    //     return () => {
+    //         window.fetch = originalFetch;
+    //     };
+    // }, [fetchPrivateClient])
 
-    return <div className="px-2 rounded outline-1 outline-offset-[-1px] outline-border ">
-        <div className="py-[8px] justify-start text-muted-foreground text-xs font-normal leading-none">Questões diárias gratuitas: {count}/3</div>
-    </div>
+    // return <div className="px-2 rounded outline-1 outline-offset-[-1px] outline-border ">
+    //     <div className="py-[8px] justify-start text-muted-foreground text-xs font-normal leading-none">Questões diárias gratuitas: {count}/10</div>
+    // </div>
+    return <></>
 }
