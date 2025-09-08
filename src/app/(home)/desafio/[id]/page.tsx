@@ -19,7 +19,9 @@ export interface QuestionChallenge extends Pick<Question, 'statement' | 'comment
 export interface QuestionChallengeData {
     [key: number]: {
         questions: Array<QuestionChallenge>
-        bloco: Pick<Block, 'id' | 'name'>;
+        bloco: Pick<Block, 'id' | 'name'> & {
+            link: string;
+        };
     }
 }
 

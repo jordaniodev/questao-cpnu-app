@@ -6,12 +6,15 @@ import { CircleCheck, CircleOff } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AlternativeQuestionChallenge, QuestionChallenge as QuestionChallengeType } from "../../page";
+import { useAuth } from "@clerk/nextjs";
+import { useAuthModal } from "@/app/(components)/AuthModal/index.hook";
 
 export interface QuestionChallengeProps {
     questions: QuestionChallengeType[]
     bloco: {
         id: number;
         name: string;
+        link: string;
     }
 }
 
@@ -76,14 +79,14 @@ export const QuestionChallenge = ({ questions, bloco }: QuestionChallengeProps) 
         setQuestionHistory(Array(5).fill('default'));
     }
 
-    // const { isLoaded, isSignedIn } = useAuth();
-    // const { openModal } = useAuthModal();
+    const { isLoaded, isSignedIn } = useAuth();
+    const { openModal } = useAuthModal();
 
-    // if (isLoaded && !isSignedIn) {
-    //     setTimeout(() => {
-    //         openModal();
-    //     }, 1000);
-    // }
+    if (isLoaded && !isSignedIn) {
+        setTimeout(() => {
+            openModal();
+        }, 1000);
+    }
 
     return (!allQuestionAnswers ?
         <>
@@ -207,7 +210,7 @@ export const QuestionChallenge = ({ questions, bloco }: QuestionChallengeProps) 
                             <span className="line-through text-foreground text-sm font-normal leading-none">R$ 94,85 <span className="line-through text-muted-foreground text-sm font-normal  leading-none">/Mês</span></span>
                             <span className="text-emerald-500 font-bold text-3xl font-normal leading-9">R$ 47,49 <span className="text-muted-foreground text-xl font-normal leading-tight">/Mês*</span></span>
                         </div>
-                        <a href="https://pay.hotmart.com/D101567697R?bid=1756692864099" target="_blank" className="w-full">
+                        <a href={bloco.link} target="_blank" className="w-full">
                             <Button variant="default" className="w-full bg-emerald-500 hover:bg-emerald-500">
                                 Aproveitar desconto agora
                             </Button>
