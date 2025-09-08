@@ -5,7 +5,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 1,
             name: "SEGURIDADE SOCIAL: SAÚDE, ASSISTÊNCIA SOCIAL E PREVIDÊNCIA SOCIAL",
-            link: 'https://pay.hotmart.com/G93027100C'
+            link: 'https://pay.hotmart.com/G93027100C?off=qhule29o'
         },
         "questions": [
             {
@@ -209,7 +209,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 2,
             name: "CULTURA E EDUCAÇÃO",
-            link: 'https://pay.hotmart.com/H93049237J'
+            link: 'https://pay.hotmart.com/H93049237J?off=3yan5lkq'
         },
         "questions": [
             {
@@ -413,7 +413,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 3,
             name: "CIÊNCIAS, DADOS E TECNOLOGIA",
-            link: 'https://pay.hotmart.com/Y93049599N'
+            link: 'https://pay.hotmart.com/Y93049599N?off=jcb1meu6'
         },
         "questions": [
             {
@@ -617,7 +617,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 4,
             name: "ENGENHARIAS E ARQUITETURA",
-            link: 'https://pay.hotmart.com/M93049912K'
+            link: 'https://pay.hotmart.com/M93049912K?off=vnrs20g5'
         },
         "questions": [
             {
@@ -821,7 +821,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 5,
             name: "ADMINISTRAÇÃO",
-            link: 'https://pay.hotmart.com/N93052096N'
+            link: 'https://pay.hotmart.com/N93052096N?off=bs0okgm2'
         },
         "questions": [
             {
@@ -1025,7 +1025,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 6,
             name: "DESENVOLVIMENTO SOCIOECONÔMICO",
-            link: 'https://pay.hotmart.com/A93053412A'
+            link: 'https://pay.hotmart.com/A93053412A?off=ow4qrt9s'
         },
         "questions": [
             {
@@ -1229,7 +1229,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 7,
             name: "JUSTIÇA E DEFESA",
-            link: 'https://pay.hotmart.com/N93056228W'
+            link: 'https://pay.hotmart.com/N93056228W?off=3cghzapn'
         },
         "questions": [
             {
@@ -1433,7 +1433,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 8,
             name: "INTERMEDIÁRIO - SAÚDE",
-            link: 'https://pay.hotmart.com/K93056695C'
+            link: 'https://pay.hotmart.com/K93056695C?off=ghbd6p9t'
         },
         "questions": [
             {
@@ -1637,7 +1637,7 @@ export const QUESTIONS: QuestionChallengeData = {
         bloco: {
             id: 9,
             name: "INTERMEDIÁRIO - REGULAÇÃO",
-            link: 'https://pay.hotmart.com/V100983858M'
+            link: 'https://pay.hotmart.com/V100983858M?off=3nk1qqdl'
         },
         "questions": [
             {
