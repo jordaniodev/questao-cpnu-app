@@ -14,6 +14,7 @@ import { ModalProvider } from './(components)/AuthModal/index.hook'
 import { AuthModal } from './(components)/AuthModal'
 import { PaymentModalProvider } from './(components)/PaymentModal/index.hook'
 import { PaymentModal } from './(components)/PaymentModal'
+import { NiceModalProvider } from './(components)/NiceModal/NiceModal'
 
 
 const geistSans = Geist({
@@ -47,7 +48,8 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={ptBR}>
       <ModalProvider>
-        <PaymentModalProvider>
+        <NiceModalProvider> 
+          <PaymentModalProvider>
           <PaymentModal />
           <AuthModal />
           <html lang="en">
@@ -88,6 +90,7 @@ export default function RootLayout({
             </body>
           </html>
         </PaymentModalProvider>
+        </NiceModalProvider>
       </ModalProvider>
     </ClerkProvider>
   )

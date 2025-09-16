@@ -3,7 +3,7 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { QuestionProps } from "./index.type";
 import { Button } from "@/components/ui/button";
-import { BookCheck, CircleCheck, CircleOff, LoaderCircle } from "lucide-react";
+import { BookCheck, CircleCheck, CircleOff, Flag, LoaderCircle } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Alternative } from "@/types/Alternative";
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
@@ -13,7 +13,8 @@ import { useAuth } from "@clerk/nextjs";
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook";
 import { Question as QuestionType } from "@/types/Question";
 import { Ads } from "@/types/Ads";
-import { AdsModal } from "../AdsModal";
+import { AdsModal } from "../_modals/AdsModal";
+import { openComplaintModal } from "../_modals/ComplaintModal/ComplaintModal";
 
 export const Question = ({ question }: QuestionProps) => {
     const fetchPrivateClient = usePrivateFetch();
@@ -167,6 +168,9 @@ export const Question = ({ question }: QuestionProps) => {
                                         Ver justificativa
                                     </Button>
                                 </DrawerTrigger>
+                                <Button variant={'ghost'} className="text-muted-foreground" onClick={openComplaintModal} >
+                                    <Flag />
+                                </Button>
                             </div>
                             <Button
                                 // className={"min-w-[120px] w-full sm:w-auto" + (alternativeWasSelected ? " bg-gray-200 text-gray-500 cursor-not-allowed" : (alternativeSelected.correctAnswer ? " bg-emerald-500" : " bg-red-600"))}

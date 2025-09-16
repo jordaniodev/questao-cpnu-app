@@ -45,15 +45,15 @@ export const ResponsiveModal = ({
       <CredenzaContent
         aria-describedby={title ? `Modal ${title}` : undefined}
         className={clsx(
-          "gap-0 py-0 rounded-xl",
+          "gap-0 py-0 rounded-xl pr-6 pt-6 pl-6 pb-10 !h-[400px] rounded-b-none md:rounded-b-xl",
           hideCloseButton && "[&>button]:hidden",
           SIZE_CLASS[size],
           contentClassName,
         )}
       >
         {title && (
-          <CredenzaHeader className={cn("py-6", headerClassName)}>
-            <CredenzaTitle className="text-xl font-bold text-muted-foreground leading-5">
+          <CredenzaHeader className={cn("py-1", headerClassName)}>
+            <CredenzaTitle className="text-sm font-bold text-neutral leading-5">
               {title}
             </CredenzaTitle>
           </CredenzaHeader>
