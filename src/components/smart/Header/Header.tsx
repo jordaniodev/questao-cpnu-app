@@ -6,7 +6,6 @@ import Link from "next/link"
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook"
 import { MenuBar } from "../MenuBar/MenuBar"
 import Image from "next/image"
-import { ThemeToggle } from "../ThemeToggle/ThemeToggle"
 
 export const Header = () => {
     const { openModal } = useAuthModal();

@@ -8,6 +8,11 @@ import { openModal, closeModal } from "@/lib/modal-helpers";
 
 
 const SubscriptionModal = NiceModal.create(() => {
+
+  const openAssinatura = () => {
+    window.open("https://consumer.hotmart.com/main", "_blank", "noopener,noreferrer");
+  };
+  
   return (
     <ResponsiveModal title="Minha assinatura" size="sm" contentClassName="flex flex-col gap-4 !h-auto">
       <div className=" gap-4 flex flex-col">
@@ -20,7 +25,7 @@ const SubscriptionModal = NiceModal.create(() => {
           
         <div className="justify-start flex flex-col gap-2">
           <span className="text-xs text-muted-foreground text-left">Sua assinatura é gerenciada pela Hotmart.</span>
-          <Button variant="outline" className="justify-between">
+          <Button variant="outline" className="justify-between" onClick={openAssinatura}>
             <div className="flex gap-1 items-center">
               <Image src="/images/hotmart.svg" alt="Hotmart" width={16} height={16} />
               <p>Gerenciar minha assinatura</p>

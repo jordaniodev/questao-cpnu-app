@@ -1,6 +1,5 @@
 'use client'
 
-import { cn } from "@/lib/utils";
 import { LayoutDashboard, ListTodo, Settings } from "lucide-react"
 import { MenuItem } from "./MenuItem/MenuItem";
 import { usePathname } from "next/navigation";
@@ -20,7 +19,7 @@ export const MenuBar = ({className}:MenuBarProps) => {
   }
 
   return (
-    <div className={cn("bg-background flex gap-2 items-center justify-center border-t-1 px-6 py-2", className)}>
+    <div className={`bg-background flex gap-2 items-center justify-center border-t-1 px-6 py-2 ${className}`}>
       <MenuItem 
         icon={<LayoutDashboard className="h-4 w-4 text-foreground" />}
         label="Painel"

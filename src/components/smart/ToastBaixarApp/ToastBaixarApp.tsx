@@ -33,13 +33,13 @@ export const ToastBaixarApp = () => {
     <Card className="fixed top-4 left-1/2 -translate-x-1/2 flex items-center flex-row p-4 gap-2 w-[375px] z-50">
       <CardContent className="flex gap-3 px-0 items-center">
         <Button
-          variant="outline"
+          variant="ghost"
           className="border-none shadow-none !p-0"
-          onClick={handleClose}
+          onClick={handleClose} 
         >
           <X />
         </Button>
-        <Image src="/images/android.png" alt="Logo" width={32} height={32} />
+        <Image src="/images/android.png" alt="Logo" width={82} height={82} />
         <CardDescription className="p-0 flex text-xs font-normal">
           Obtenha acesso rápido ao nosso aplicativo — instale-o agora no seu dispositivo.
         </CardDescription>

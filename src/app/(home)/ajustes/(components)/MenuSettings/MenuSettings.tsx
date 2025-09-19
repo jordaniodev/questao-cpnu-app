@@ -8,6 +8,9 @@ import { MenuSettingsItem } from "./MenuSettingsItem/MenuSettingsItem"
 import NiceModal from "@ebay/nice-modal-react" 
 import { ChooseModeDarkLight } from "@/components/smart/ChooseModeDarkLight/ChooseModeDarkLight"
 import { UserInfo } from "@/components/smart/UserInfo/UserInfo"
+import { openTutorialDownloadApp } from "@/components/smart/ToastBaixarApp/TutorialDownloadModal/TutorialDownloadModal"
+import { isIOS } from "react-device-detect"
+import { InstallPWAButton } from "@/app/(components)/InstallPWA"
 
 const items = [ 
   {
@@ -41,7 +44,7 @@ export const MenuSetings = () => {
         ))}
       </div>
 
-      <Button variant="outline" className="justify-start">
+      <Button variant="outline" className="justify-start p-4" onClick={openTutorialDownloadApp}>
         <Image src="/images/apple.svg" alt="logo" width={16} height={16} />
         Instalar Aplicativo
       </Button>
