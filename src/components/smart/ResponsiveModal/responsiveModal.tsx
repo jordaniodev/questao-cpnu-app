@@ -45,7 +45,7 @@ export const ResponsiveModal = ({
       <CredenzaContent
         aria-describedby={title ? `Modal ${title}` : undefined}
         className={clsx(
-          "gap-0 py-0 rounded-xl pr-6 pt-6 pl-6 pb-10 !h-[400px] rounded-b-none md:rounded-b-xl",
+          "gap-0 py-0 rounded-xl pr-6 pt-6 pl-6 pb-10 rounded-b-none md:rounded-b-xl",
           hideCloseButton && "[&>button]:hidden",
           SIZE_CLASS[size],
           contentClassName,

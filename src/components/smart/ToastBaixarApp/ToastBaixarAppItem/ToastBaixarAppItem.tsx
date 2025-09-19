@@ -6,7 +6,7 @@ import { SquarePlus } from "lucide-react";
 import Image from "next/image";
 
 
-const TutorialDownloadApp = NiceModal.create(() => {
+const ToastBaixarAppItem = NiceModal.create(() => {
     return (
         <ResponsiveModal title="Instalar o aplicativo" size="md">
             <div className=" gap-4 flex flex-col mt-4">
@@ -52,13 +52,13 @@ const TutorialDownloadApp = NiceModal.create(() => {
     )
 });
 
-NiceModal.register("TutorialDownloadApp", TutorialDownloadApp);
+NiceModal.register("ToastBaixarAppItem", ToastBaixarAppItem);
 
-const openTutorialDownloadApp = () => openModal("TutorialDownloadApp", {});
-const closeTutorialDownloadApp = () => closeModal("TutorialDownloadApp");
+const openToastBaixarAppItem = () => openModal("ToastBaixarAppItem", {});
+const closeToastBaixarAppItem = () => closeModal("ToastBaixarAppItem");
 
 export {
-  TutorialDownloadApp,
-  openTutorialDownloadApp,
-  closeTutorialDownloadApp,
+  ToastBaixarAppItem,
+  openToastBaixarAppItem,
+  closeToastBaixarAppItem,
 };

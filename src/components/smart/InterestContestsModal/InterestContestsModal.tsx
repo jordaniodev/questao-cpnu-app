@@ -1,3 +1,5 @@
+'use client'
+
 import { ResponsiveModal } from "@/components/smart/ResponsiveModal/responsiveModal"
 import { Button } from "@/components/ui/button"
 import NiceModal from "@ebay/nice-modal-react";

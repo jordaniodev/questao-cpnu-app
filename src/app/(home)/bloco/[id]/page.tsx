@@ -6,7 +6,6 @@ import { Topic } from "@/types/Topic";
 import { ChoiceSubTopics } from "./(components)/ChoiceSubTopic";
 import { fetchPublicServer } from "@/lib/fetchPublic";
 import { QuestionByBlock } from "./(components)/QuestionByBlock";
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";

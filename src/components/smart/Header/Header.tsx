@@ -6,12 +6,18 @@ import Link from "next/link"
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook"
 import { MenuBar } from "../MenuBar/MenuBar"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 export const Header = () => {
     const { openModal } = useAuthModal();
+    const pathname = usePathname()
 
     const signIn = () => {
         openModal();
+    }
+
+    if (pathname.includes("/questao")) {
+        return null
     }
 
     return <header className="w-full bg-sidebar-background items-center sticky top-0 z-10">

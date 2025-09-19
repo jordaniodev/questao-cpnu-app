@@ -5,7 +5,7 @@ import { Card, CardAction, CardContent, CardDescription } from "@/components/ui/
 import { X } from "lucide-react"
 import { useEffect, useState } from "react"
 import { isIOS } from 'react-device-detect';
-import { openTutorialDownloadApp } from "./TutorialDownloadModal/TutorialDownloadModal"
+import { openToastBaixarAppItem } from "./ToastBaixarAppItem/ToastBaixarAppItem"
 import Image from "next/image"
 
 const LOCAL_STORAGE_KEY = "toastClosedAt"
@@ -44,7 +44,7 @@ export const ToastBaixarApp = () => {
           Obtenha acesso rápido ao nosso aplicativo — instale-o agora no seu dispositivo.
         </CardDescription>
         <CardAction className="flex items-center justify-center self-center">
-          <Button onClick={openTutorialDownloadApp}>
+          <Button onClick={openToastBaixarAppItem}>
             Instalar
           </Button>
         </CardAction>

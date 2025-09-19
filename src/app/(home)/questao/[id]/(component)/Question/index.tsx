@@ -89,6 +89,20 @@ export const Question = ({ question }: QuestionProps) => {
         return '';
     }
 
+    const cssClassBadge = (alternative: Alternative) => {
+        const classWrong = "bg-[var(--custom-error)] text-white";
+        const classCorrect = "bg-[var(--custom-success)] text-white";
+        const classSelected = "bg-primary text-white";
+
+        if (alternativeSelected?.id === alternative.id) {
+            if (!alternativeWasConfirmed) return classSelected;
+            if (alternativeSelected.correctAnswer) return classCorrect;
+            return classWrong;
+        }
+
+        return "bg-sidebar-accent text-muted-foreground";
+    };
+
 
     const sendAnswer = async () => {
         try {
@@ -174,11 +188,13 @@ export const Question = ({ question }: QuestionProps) => {
                             >
                                 <CardContent>
                                 <CardTitle className="flex items-center gap-2 text-[12px] leading-[16px]">
-                                    <Badge variant="secondary" className="bg-sidebar-accent rounded-md">
-                                        <p className="text-xs text-muted-foreground font-extrabold">
+                                    <div
+                                        className={`${cssClassBadge(alternative)} rounded-sm min-w-5 min-h-5 items-center flex  justify-center`}
+                                    >
+                                        <p className="text-xs font-extrabold leading-0">
                                             {letter}
                                         </p>
-                                    </Badge>
+                                    </div>
 
                                     <span dangerouslySetInnerHTML={{ __html: alternative.description }} />
                                 </CardTitle>
@@ -189,20 +205,22 @@ export const Question = ({ question }: QuestionProps) => {
                     </div>
                     <footer className="fixed w-full py-[20px] flex items-center justify-center bottom-[0px] left-0 z-3 bg-background border-t border-border ">
                         <div className="px-[16px] flex flex-col gap-2 sm:flex-row sm:justify-end sm:max-w-[800px] w-full">
-                            <div className={(alternativeWasConfirmed ? "justify-between" : "justify-end") + " flex flex-1"}>
-                                {alternativeWasConfirmed && <>
-                                    {alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
-                                        <CircleCheck className="text-emerald-500" />
-                                        Correta
-                                    </Button>}
-                                    {!alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
-                                        <CircleOff className="text-red-600" />
-                                        Incorreta
-                                    </Button>}
-                                </>}
-                                <Button variant={'ghost'} className="text-muted-foreground" onClick={openComplaintModal} >
-                                    <Flag />
-                                </Button>
+                            <div className="flex-1">
+                                <div className="flex flex-1 justify-between md:justify-normal">
+                                    {alternativeWasConfirmed && <>
+                                        {alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
+                                            <CircleCheck className="text-emerald-500" />
+                                            Correta
+                                        </Button>}
+                                        {!alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
+                                            <CircleOff className="text-red-600" />
+                                            Incorreta
+                                        </Button>}
+                                    </>}
+                                    <Button variant={'ghost'} className="text-muted-foreground" onClick={openComplaintModal} >
+                                        <Flag />
+                                    </Button>
+                                </div>
                             </div>
                             <DrawerTrigger disabled={!alternativeWasConfirmed}>
                                 <Button
