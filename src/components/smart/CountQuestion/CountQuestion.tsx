@@ -45,6 +45,6 @@ export const CountQuestion = ({className}:CountQuestionProps) => {
     }, [fetchPrivateClient])
 
     return <div className={`px-2 rounded outline-1 outline-offset-[-1px] outline-border ${className}`}>
-        <div className="py-[8px] justify-start text-muted-foreground text-xs font-normal leading-none">Questões diárias gratuitas: {count}/10</div>
+        <div className="py-[8px] justify-start text-muted-foreground text-xs font-normal leading-none">Questões diárias: {count}/10</div>
     </div>
 }

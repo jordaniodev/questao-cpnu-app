@@ -64,7 +64,7 @@ export const ChoiceTopics = ({ topics }: ChoiceTopicProps) => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
-            {/* <Card className="bg-white cursor-pointer">
+            {/* <Card className="bg-background cursor-pointer">
                 <CardContent>
                     <CardTitle className="flex items-center justify-between">
                         <div className="flex flex-col gap-[2px]">
@@ -78,7 +78,7 @@ export const ChoiceTopics = ({ topics }: ChoiceTopicProps) => {
                 </CardContent>
             </Card> */}
             {filteredTopics.map((topic, index: number) => {
-                return <Card key={topic.id} onClick={() => handleDrawQuestions(topic.id)} className="bg-white cursor-pointer">
+                return <Card key={topic.id} onClick={() => handleDrawQuestions(topic.id)} className="bg-background cursor-pointer">
                     <CardContent>
                         <CardTitle className="flex items-center justify-between">
                             <div className="flex flex-col gap-[2px]">

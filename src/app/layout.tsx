@@ -16,6 +16,7 @@ import { PaymentModal } from './(components)/PaymentModal'
 import { NiceModalProvider } from './(components)/NiceModal/NiceModal'
 import { MenuBar } from '@/components/smart/MenuBar/MenuBar'
 import { ToastBaixarApp } from '@/components/smart/ToastBaixarApp/ToastBaixarApp'
+import { ThemeProvider } from '@/components/providers/theme.provider';
 
 
 const geistSans = Geist({
@@ -65,7 +66,8 @@ export default function RootLayout({
               <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
               <meta name="theme-color" content="#ffffff" />
             </Head>
-            <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} antialiased pb-18`}>
+              <ThemeProvider defaultTheme="system" storageKey="app-theme">
               <ToastBaixarApp />
               {children}
               <Script
@@ -89,7 +91,8 @@ export default function RootLayout({
                 })(window, document, "clarity", "script", "svhx2ik86g");
               `}
               </Script>
-              <MenuBar  className='md:hidden'/>
+              <MenuBar className='md:hidden fixed bottom-0 left-0 right-0'/>
+              </ThemeProvider>
             </body>
           </html>
         </PaymentModalProvider>

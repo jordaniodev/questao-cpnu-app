@@ -20,7 +20,7 @@ export default async function Home() {
         </div>
       </div>
       <div className="w-full overflow-x-auto">
-        <div className="flex flex-col gap-[12px] pb-[40px]">
+        <div className="flex flex-col md:grid-cols-3 md:grid gap-3 pb-10">
           {blocks.data.map((block, index) => (
             <Link href={`/escolha-tipo/${block.id}`} className="w-full" key={block.id}>
               <Card className="w-full  p-[16px]">

@@ -12,10 +12,11 @@ interface MenuBarProps {
 
 export const MenuBar = ({className}:MenuBarProps) => {
 
+  const hiddenRoutes = ["/"]
   const pathname = usePathname();
 
-  if (pathname.startsWith("/questao")) {
-    return null;
+  if (hiddenRoutes.includes(pathname) || pathname.startsWith("/questao")) {
+    return null
   }
 
   return (

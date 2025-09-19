@@ -89,23 +89,27 @@ export const QuestionChallenge = ({ questions, bloco }: QuestionChallengeProps) 
     }
 
     return (!allQuestionAnswers ?
-        <>
+        <div className="p-2">
             <div className="flex w-full justify-center mt-[24px]">
                 <div className="rounded-2xl outline outline-offset-[-1px] outline-border inline-flex flex-col justify-start items-start overflow-hidden mx-auto w-[600px]">
-                    <div className="flex flex-col p-[1rem] bg-sidebar-background border-b border-border justify-center items-start gap-4 overflow-hidden w-[600px]">
-                        <h2 className="justify-start text-primary font-bold leading-none">Desafio SimulaPRO 2025</h2>
-                        <h3 className="justify-start text-base-muted-foreground text-xs font-normal leading-none">Acerte ao menos 3 de 5 questões do bloco 6 para ganhar um desconto para simulados!</h3>
-                        <ul className="list-none flex gap-[4px] w-full">
+                    <div className="flex flex-col p-4 bg-sidebar-background border-b border-border justify-center items-start gap-4 w-full max-w-[600px]">
+                        <h2 className="text-primary font-bold leading-none">Desafio SimulaPRO 2025</h2>
+                        <h3 className="text-muted-foreground text-xs font-normal leading-none">
+                            Acerte ao menos 3 de 5 questões do bloco 6 para ganhar um desconto para simulados!
+                        </h3>
+
+                        <ul className="flex gap-1 w-full">
                             {questionHistory.map((question, index) => (
-                                <li
-                                    key={index}
-                                    className={`h-2 ${question === 'correct'
-                                        ? 'bg-emerald-500'
-                                        : question === 'wrong'
-                                            ? 'bg-[#be185d]'
-                                            : 'bg-ring'
-                                        } rounded-full overflow-hidden flex-1`}
-                                ></li>
+                            <li
+                                key={index}
+                                className={`h-2 flex-1 rounded-full ${
+                                question === 'correct'
+                                    ? 'bg-emerald-500'
+                                    : question === 'wrong'
+                                    ? 'bg-[#be185d]'
+                                    : 'bg-ring'
+                                }`}
+                            ></li>
                             ))}
                         </ul>
                     </div>
@@ -145,7 +149,7 @@ export const QuestionChallenge = ({ questions, bloco }: QuestionChallengeProps) 
                             </Card>
                         ))}
                     </div>
-                    <footer className="fixed w-full py-[20px] flex items-center justify-center bottom-[0px] left-0 z-3 bg-white border-t border-border ">
+                    <footer className="fixed w-full py-[20px] flex items-center justify-center bottom-[0px] left-0 z-3 bg-background border-t border-border ">
                         <div className="px-[16px] flex flex-col gap-2 sm:flex-row sm:justify-end sm:max-w-[800px] w-full">
                             <div className={(alternativeWasConfirmed ? "justify-between" : "justify-end") + " flex flex-1"}>
                                 {alternativeWasConfirmed && <>
@@ -170,7 +174,7 @@ export const QuestionChallenge = ({ questions, bloco }: QuestionChallengeProps) 
                     </footer>
                 </div>
             </div>
-        </> :
+        </div> :
         questionHistory.filter(q => q === 'correct').length >= 3 ? (
         <div className="mt-[24px] max-w-[600px] mx-auto">
             <div className="flex w-full justify-center mt-[24px] flex-col gap-4">
@@ -208,7 +212,7 @@ export const QuestionChallenge = ({ questions, bloco }: QuestionChallengeProps) 
                         <span className="w-full text-center text-foreground text-sm font-bold leading-none">10 simulados do Bloco {bloco.id}</span>
                         <div className="p-6 w-full bg-sidebar-accent rounded-lg flex flex-col justify-center items-center gap-2">
                             <span className="line-through text-foreground text-sm font-normal leading-none">R$ 94,85 <span className="line-through text-muted-foreground text-sm font-normal  leading-none">/Mês</span></span>
-                            <span className="text-emerald-500 font-bold text-3xl font-normal leading-9">R$ 47,49 <span className="text-muted-foreground text-xl font-normal leading-tight">/Mês*</span></span>
+                            <span className="text-emerald-500 font-bold text-3xl leading-9">R$ 47,49 <span className="text-muted-foreground text-xl font-normal leading-tight">/Mês*</span></span>
                         </div>
                         <a href={bloco.link} target="_blank" className="w-full">
                             <Button variant="default" className="w-full bg-emerald-500 hover:bg-emerald-500">

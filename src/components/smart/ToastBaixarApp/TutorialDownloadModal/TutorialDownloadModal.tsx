@@ -1,8 +1,9 @@
 import { ResponsiveModal } from "@/components/smart/ResponsiveModal/responsiveModal"
 import { Card } from "@/components/ui/card";
-import { CredenzaFooter } from "@/components/ui/credenza";
+import { closeModal, openModal } from "@/lib/modal-helpers";
 import NiceModal from "@ebay/nice-modal-react";
 import { SquarePlus } from "lucide-react";
+import Image from "next/image";
 
 
 const TutorialDownloadApp = NiceModal.create(() => {
@@ -11,7 +12,7 @@ const TutorialDownloadApp = NiceModal.create(() => {
             <div className=" gap-4 flex flex-col mt-4">
                 <Card className="bg-accent p-4">
                     <div className="flex gap-4">
-                        <img src="/images/android.png" alt="Logo" className="w-12 h-12" />
+                        <Image src="/images/android.png" alt="Logo" width={48} height={48}/>
                         <div className="flex flex-col gap-1">
                             <span className="text-primary text-sm font-extrabold">Concurso.app</span>
                             <span className="text-muted-foreground text-xs font-normal">Concurso.app</span>
@@ -19,7 +20,7 @@ const TutorialDownloadApp = NiceModal.create(() => {
                     </div>
                 </Card>
 
-                <CredenzaFooter className="!justify-start flex p-0 pl-4">
+                <div className="!justify-start flex p-0 pl-4">
                     <ol className="list-decimal  flex flex-col gap-2">
                         <li className="text-sm text-card-foreground font-normal">
                             <div className="flex items-center gap-1">
@@ -40,13 +41,12 @@ const TutorialDownloadApp = NiceModal.create(() => {
                         <li className="text-sm text-card-foreground font-normal">
                             <div className="flex items-center gap-1">
                                 <p>Procure pelo ícone</p>
-                                <img src="/images/android.png" alt="Logo" className="w-5 h-5" />
+                                <Image src="/images/android.png" alt="Logo" width={20} height={20} />
                                 <p>menu do navegador.</p>
                             </div>
                         </li>
                     </ol>
-
-                </CredenzaFooter>
+                </div>
             </div>
         </ResponsiveModal>
     )
@@ -54,10 +54,8 @@ const TutorialDownloadApp = NiceModal.create(() => {
 
 NiceModal.register("TutorialDownloadApp", TutorialDownloadApp);
 
-const openTutorialDownloadApp = () =>
-  NiceModal.show("TutorialDownloadApp");
-const closeTutorialDownloadApp = () =>
-  void NiceModal.hide("TutorialDownloadApp");
+const openTutorialDownloadApp = () => openModal("TutorialDownloadApp", {});
+const closeTutorialDownloadApp = () => closeModal("TutorialDownloadApp");
 
 export {
   TutorialDownloadApp,

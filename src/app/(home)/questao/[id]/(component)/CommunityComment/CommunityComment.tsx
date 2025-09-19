@@ -1,8 +1,9 @@
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { CommunityCommentProps } from "./CommunityComment.type";
 import { Button } from "@/components/ui/button";
 import { Flag, Send } from "lucide-react";
 import { openReportCommentModal } from "../_modals/ReportCommentModal/ReportCommentModal";
+import { Input } from "@/components/ui/input";
 
 export const CommunityComment = ({
   users
@@ -34,7 +35,7 @@ export const CommunityComment = ({
           <div className="text-sm text-justify">{user.commentText}</div>
 
           <div className="flex items-center gap-2">
-            <input
+            <Input
               type="text"
               placeholder="Contribua com um comentário"
               className="border rounded-md p-2 w-full focus:outline-none"

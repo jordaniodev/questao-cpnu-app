@@ -1,31 +1,29 @@
 import { ResponsiveModal } from "@/components/smart/ResponsiveModal/responsiveModal"
 import { Button } from "@/components/ui/button"
-import { CredenzaFooter } from "@/components/ui/credenza";
+import { closeModal, openModal } from "@/lib/modal-helpers";
 import NiceModal from "@ebay/nice-modal-react";
 
 
 const ReportCommentModal = NiceModal.create(() => {
-    return (
-        <ResponsiveModal title="Reportar comentário" size="md">
-            <div className=" gap-4 flex flex-col">
-                <p className="text-sm font-normal text-card-foreground">Algo de errado com este comentário? Nos explique o motivo!</p>
+  return (
+    <ResponsiveModal title="Reportar comentário" size="md">
+      <div className=" gap-4 flex flex-col">
+        <p className="text-sm font-normal text-card-foreground">Algo de errado com este comentário? Nos explique o motivo!</p>
 
-                <textarea className="w-full h-[100px] p-2 border border-border rounded-md text-sm" placeholder="Explique o motivo"></textarea>
-                    <Button variant="default" className="self-end w-30">Enviar</Button>
-                <CredenzaFooter className="justify-start flex p-0">
-                    <span className="text-xs text-muted-foreground text-left">Você receberá um feedback sobre sua solicitação pelo email cadastrado no seu perfil.</span>
-                </CredenzaFooter>
-            </div>
-        </ResponsiveModal>
-    )
+        <textarea className="w-full h-[100px] p-2 border border-border rounded-md text-sm" placeholder="Explique o motivo"></textarea>
+          <Button variant="default" className="self-end w-30">Enviar</Button>
+        <div className="justify-start flex p-0">
+          <span className="text-xs text-muted-foreground text-left">Você receberá um feedback sobre sua solicitação pelo email cadastrado no seu perfil.</span>
+        </div>
+      </div>
+    </ResponsiveModal>
+  )
 });
 
 NiceModal.register("ReportCommentModal", ReportCommentModal);
 
-const openReportCommentModal = () =>
-  NiceModal.show("ReportCommentModal");
-const closeReportCommentModal = () =>
-  void NiceModal.hide("ReportCommentModal");
+const openReportCommentModal = () => openModal("ReportCommentModal");
+const closeReportCommentModal = () => closeModal("ReportCommentModal");
 
 export {
   ReportCommentModal,

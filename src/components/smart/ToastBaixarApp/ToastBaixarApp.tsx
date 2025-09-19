@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 import { useEffect, useState } from "react"
 import { isIOS } from 'react-device-detect';
 import { openTutorialDownloadApp } from "./TutorialDownloadModal/TutorialDownloadModal"
+import Image from "next/image"
 
 const LOCAL_STORAGE_KEY = "toastClosedAt"
 
@@ -38,7 +39,7 @@ export const ToastBaixarApp = () => {
         >
           <X />
         </Button>
-        <img src="/images/android.png" alt="Logo" width={32} height={32} />
+        <Image src="/images/android.png" alt="Logo" width={32} height={32} />
         <CardDescription className="p-0 flex text-xs font-normal">
           Obtenha acesso rápido ao nosso aplicativo — instale-o agora no seu dispositivo.
         </CardDescription>

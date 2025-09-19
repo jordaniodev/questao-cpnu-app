@@ -187,7 +187,7 @@ export const Question = ({ question }: QuestionProps) => {
                             );
                         })}
                     </div>
-                    <footer className="fixed w-full py-[20px] flex items-center justify-center bottom-[0px] left-0 z-3 bg-white border-t border-border ">
+                    <footer className="fixed w-full py-[20px] flex items-center justify-center bottom-[0px] left-0 z-3 bg-background border-t border-border ">
                         <div className="px-[16px] flex flex-col gap-2 sm:flex-row sm:justify-end sm:max-w-[800px] w-full">
                             <div className={(alternativeWasConfirmed ? "justify-between" : "justify-end") + " flex flex-1"}>
                                 {alternativeWasConfirmed && <>
@@ -200,7 +200,6 @@ export const Question = ({ question }: QuestionProps) => {
                                         Incorreta
                                     </Button>}
                                 </>}
-                                
                                 <Button variant={'ghost'} className="text-muted-foreground" onClick={openComplaintModal} >
                                     <Flag />
                                 </Button>

@@ -5,6 +5,8 @@ import { CountQuestion } from "../CountQuestion/CountQuestion"
 import Link from "next/link"
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook"
 import { MenuBar } from "../MenuBar/MenuBar"
+import Image from "next/image"
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle"
 
 export const Header = () => {
     const { openModal } = useAuthModal();
@@ -17,7 +19,7 @@ export const Header = () => {
         <div className="flex justify-end items-center p-4 gap-4 max-w-[1280px] mx-auto">
             <div className="flex items-center gap-4 justify-between w-full">
                 <Link href="/">
-                    <img src="/images/logo/concurso-app-icon.svg" alt="Logo" width={40} height={40} />
+                    <Image src="/images/logo/concurso-app-icon.svg" alt="Logo" width={40} height={40} />
                 </Link>
                 <MenuBar className="bg-sidebar-background border-none hidden md:flex" />
                 <SignedOut>
