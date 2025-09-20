@@ -11,6 +11,8 @@ import { UserInfo } from "@/components/smart/UserInfo/UserInfo"
 import { openToastBaixarAppItem } from "@/components/smart/ToastBaixarApp/ToastBaixarAppItem/ToastBaixarAppItem"
 import { isIOS } from "react-device-detect"
 import { InstallPWAButton } from "@/app/(components)/InstallPWA"
+import { useCountQuestion } from "@/components/smart/CountQuestion/CountQuestionContext"
+import { CountQuestionBadge } from "@/components/smart/CountQuestionBadge/CountQuestionBadge"
 
 const items = [ 
   {
@@ -30,11 +32,11 @@ const items = [
   },
 ]
 
-export const MenuSetings = () => { 
-
+export const MenuSettings = () => {
+  const { count } = useCountQuestion();
   return (
     <div className="flex-col gap-4 flex w-full md:w-[500px]">
-      <Button className="mt-[10px] text-muted-foreground font-medium text-xs" variant={'secondary'} size={'sm'}>Questões gratuitas diárias: 0/10</Button>
+      <CountQuestionBadge className="mt-[10px]" />
       <UserInfo />
 
       <div className="px-2 w-full gap-0 justify-start border rounded-lg">

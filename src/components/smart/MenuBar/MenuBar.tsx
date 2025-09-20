@@ -9,7 +9,7 @@ interface MenuBarProps {
 }
 
 
-export const MenuBar = ({className}:MenuBarProps) => {
+export const MenuBar = ({ className }: MenuBarProps) => {
 
   const hiddenRoutes = ["/"]
   const pathname = usePathname();
@@ -20,22 +20,22 @@ export const MenuBar = ({className}:MenuBarProps) => {
 
   return (
     <div className={`bg-background flex gap-2 items-center justify-center border-t-1 px-6 py-2 ${className}`}>
-      <MenuItem 
+      <MenuItem
         icon={<LayoutDashboard className="h-4 w-4 text-foreground" />}
         label="Painel"
-        url="/"
+        url="/dashboard"
       />
-      <MenuItem 
+      <MenuItem
         icon={<ListTodo className="h-4 w-4 text-foreground" />}
         label="Questões"
-        url="/questoes"
+        url="/"
       />
-      <MenuItem 
+      <MenuItem
         label="Flashcards"
-        url="#" 
+        url="#"
         hasShortly
       />
-      <MenuItem 
+      <MenuItem
         icon={<Settings className="h-4 w-4 text-foreground" />}
         label="Ajustes"
         url="/ajustes"

@@ -19,31 +19,31 @@ import { CommunityComment } from "../CommunityComment/CommunityComment";
 import { Badge } from "@/components/ui/badge";
 
 const users = [
-  {
-    userName: "Maria",
-    commentText: "Gostei bastante!",
-    commentDate: "08/09/2025",
-  },
-  {
-    userName: "João",
-    commentText: "Muito bom!",
-    commentDate: "16/09/2025",
-  },
-  {
-    userName: "Luisa",
-    commentText: "Caramba! Essa questão me pegou de surpresa... Eu realmente achava que a “policy feedback",
-    commentDate: "16/09/2025",
-  },
-  {
-    userName: "Gabriel",
-    commentText: "Muito bom!",
-    commentDate: "16/09/2025",
-  },
-  {
-    userName: "Jordanio",
-    commentText: "Eu Gostei mas acho que meu Lider vai errar",
-    commentDate: "16/09/2025",
-  },
+    {
+        userName: "Maria",
+        commentText: "Gostei bastante!",
+        commentDate: "08/09/2025",
+    },
+    {
+        userName: "João",
+        commentText: "Muito bom!",
+        commentDate: "16/09/2025",
+    },
+    {
+        userName: "Luisa",
+        commentText: "Caramba! Essa questão me pegou de surpresa... Eu realmente achava que a “policy feedback",
+        commentDate: "16/09/2025",
+    },
+    {
+        userName: "Gabriel",
+        commentText: "Muito bom!",
+        commentDate: "16/09/2025",
+    },
+    {
+        userName: "Jordanio",
+        commentText: "Eu Gostei mas acho que meu Lider vai errar",
+        commentDate: "16/09/2025",
+    },
 ];
 
 export const Question = ({ question }: QuestionProps) => {
@@ -59,14 +59,14 @@ export const Question = ({ question }: QuestionProps) => {
     const [ads, setAds] = useState<Ads>();
 
     const choiceAlternative = async (alternative: Alternative) => {
-        if(!alternativeWasConfirmed)
+        if (!alternativeWasConfirmed)
             setAlternativeSelected(alternative);
     }
 
     const cssClassCTA = () => {
-        if(isLoading || !alternativeWasSelected) return "bg-gray-200 text-gray-500 cursor-not-allowed";
+        if (isLoading || !alternativeWasSelected) return "bg-gray-200 text-gray-500 cursor-not-allowed";
 
-        if(alternativeSelected && !alternativeWasConfirmed) return "bg-[#E0E7FF] text-primary";
+        if (alternativeSelected && !alternativeWasConfirmed) return "bg-[#E0E7FF] text-primary";
 
         return "";
     }
@@ -74,14 +74,14 @@ export const Question = ({ question }: QuestionProps) => {
 
     const cssClassAlternative = (alternative: Alternative) => {
 
-    const classWrong = " border-red-600 border bg-red-50 text-red-600 font-bold";
-    const classCorrect = " border-emerald-500 border bg-emerald-50 text-emerald-500 font-bold";
-    const classSelected = " border-primary border bg-[#E0E7FF] text-primary font-bold";
+        const classWrong = " border-red-600 border bg-red-50 text-red-600 font-bold";
+        const classCorrect = " border-emerald-500 border bg-emerald-50 text-emerald-500 font-bold";
+        const classSelected = " border-primary border bg-[#E0E7FF] text-primary font-bold";
 
         if (alternativeSelected?.id === alternative.id) {
-            if(!alternativeWasConfirmed) return classSelected;
+            if (!alternativeWasConfirmed) return classSelected;
 
-            if(alternativeSelected.correctAnswer) return classCorrect;
+            if (alternativeSelected.correctAnswer) return classCorrect;
 
             return classWrong;
         }
@@ -116,17 +116,17 @@ export const Question = ({ question }: QuestionProps) => {
             });
 
             setAlternativeWasConfirmed(true);
-        }catch(error){
+        } catch (error) {
             console.error(error);
-        }finally {
+        } finally {
             setIsLoading(false);
         }
     }
 
     const continuarHandle = async () => {
         setIsLoading(true);
-        if(!alternativeWasConfirmed && alternativeSelected)
-                return sendAnswer();
+        if (!alternativeWasConfirmed && alternativeSelected)
+            return sendAnswer();
 
         if (!alternativeSelected) return;
 
@@ -137,10 +137,10 @@ export const Question = ({ question }: QuestionProps) => {
         const topicId = choiceType === 'block' ? question.topic.block.id : question.topicId;
         const newQuestion = await fetchPrivateClient<{ question: QuestionType, ads?: Ads }>(`question/draw/${choiceType}/${topicId}?questionType=${tipoQuestao}`);
 
-        if(newQuestion.ads){
+        if (newQuestion.ads) {
             setAds(newQuestion.ads);
             setNewQuestion(newQuestion.question);
-        }else {
+        } else {
             router.replace(`/questao/${newQuestion.question.id}?choiceType=${choiceType}&tipoQuestao=${tipoQuestao}`);
         }
 
@@ -181,25 +181,25 @@ export const Question = ({ question }: QuestionProps) => {
                             const letter = String.fromCharCode(65 + index);
 
                             return (
-                            <Card
-                                key={alternative.id}
-                                onClick={() => choiceAlternative(alternative)}
-                                className={"mb-2" + cssClassAlternative(alternative)}
-                            >
-                                <CardContent>
-                                <CardTitle className="flex items-center gap-2 text-[12px] leading-[16px]">
-                                    <div
-                                        className={`${cssClassBadge(alternative)} rounded-sm min-w-5 min-h-5 items-center flex  justify-center`}
-                                    >
-                                        <p className="text-xs font-extrabold leading-0">
-                                            {letter}
-                                        </p>
-                                    </div>
+                                <Card
+                                    key={alternative.id}
+                                    onClick={() => choiceAlternative(alternative)}
+                                    className={"mb-2" + cssClassAlternative(alternative)}
+                                >
+                                    <CardContent>
+                                        <CardTitle className="flex items-center gap-2 text-[12px] leading-[16px]">
+                                            <div
+                                                className={`${cssClassBadge(alternative)} rounded-sm min-w-5 min-h-5 items-center flex  justify-center`}
+                                            >
+                                                <p className="text-xs font-extrabold leading-0">
+                                                    {letter}
+                                                </p>
+                                            </div>
 
-                                    <span dangerouslySetInnerHTML={{ __html: alternative.description }} />
-                                </CardTitle>
-                                </CardContent>
-                            </Card>
+                                            <span dangerouslySetInnerHTML={{ __html: alternative.description }} />
+                                        </CardTitle>
+                                    </CardContent>
+                                </Card>
                             );
                         })}
                     </div>

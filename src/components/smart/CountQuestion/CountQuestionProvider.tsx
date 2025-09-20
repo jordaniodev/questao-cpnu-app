@@ -8,8 +8,10 @@ export function CountQuestionProvider({ children }: { children: React.ReactNode 
     const [count, setCount] = useState(0);
 
     const updateCount = useCallback(async () => {
-        const { count: questionAnswered } = await fetchPrivateClient<{ count: number }>(`users/questions-answered-today-count`);
-        setCount(questionAnswered);
+        if(typeof window !== "undefined") {
+            const { count: questionAnswered } = await fetchPrivateClient<{ count: number }>(`users/questions-answered-today-count`);
+            setCount(questionAnswered);
+        }
     }, [fetchPrivateClient]);
 
     useEffect(() => {

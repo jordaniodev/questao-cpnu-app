@@ -50,8 +50,8 @@ export default function RootLayout({
   return (
     <ClerkProvider localization={ptBR}>
       <ModalProvider>
-        <NiceModalProvider> 
-          <PaymentModalProvider>
+        <PaymentModalProvider>
+          <NiceModalProvider>
             <PaymentModal />
             <AuthModal />
             <CountQuestionProvider>
@@ -68,7 +68,7 @@ export default function RootLayout({
                   <meta name="theme-color" content="#ffffff" />
                 </Head>
                 <body className={`${geistSans.variable} ${geistMono.variable} antialiased pb-18`}>
-                  <ThemeProvider defaultTheme="system" storageKey="app-theme">
+
                   <ToastBaixarApp />
                   {children}
                   <Script
@@ -92,13 +92,12 @@ export default function RootLayout({
                       })(window, document, "clarity", "script", "svhx2ik86g");
                     `}
                   </Script>
-                  <MenuBar className='md:hidden fixed bottom-0 left-0 right-0'/>
-                  </ThemeProvider>
+                  <MenuBar className='md:hidden fixed bottom-0 left-0 right-0' />
                 </body>
               </html>
             </CountQuestionProvider>
-          </PaymentModalProvider>
-        </NiceModalProvider>
+          </NiceModalProvider>
+        </PaymentModalProvider>
       </ModalProvider>
     </ClerkProvider>
   )

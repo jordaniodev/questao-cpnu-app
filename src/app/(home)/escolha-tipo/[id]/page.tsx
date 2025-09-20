@@ -1,3 +1,4 @@
+import { CountQuestionBadge } from "@/components/smart/CountQuestionBadge/CountQuestionBadge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -25,7 +26,7 @@ export default async function Page({ params }: EscolhaTipoProps) {
                     <div className="px-[24px] flex flex-col gap-[6px] items-start">
                         <h2 className="self-stretch justify-start text-muted-foreground text-sm font-extrabold">Questões de prova</h2>
                         <h3 className="self-stretch justify-start text-muted-foreground text-sm font-normal">Questões no formato da banca FGV</h3>
-                        <Button className="mt-[10px] text-muted-foreground font-medium text-xs" variant={'secondary'} size={'sm'}>Questões gratuitas diárias: 0/10</Button>
+                        <CountQuestionBadge className="mt-[10px]" />
                     </div>
                 </Card>
             </Link>
