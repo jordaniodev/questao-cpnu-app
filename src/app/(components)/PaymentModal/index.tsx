@@ -22,7 +22,7 @@ export const PaymentModal = () => {
                     <span className="line-through text-foreground text-sm font-normal leading-none">R$ 59,99 </span>
                     <span className="text-emerald-500 font-bold text-3xl leading-9">R$ 29,97</span>
                 </div>
-                <a href="https://pay.hotmart.com/D101567697R?bid=1756692864099" target="_blank" className="w-full">
+                <a href="https://pay.hotmart.com/R102024553L" target="_blank" className="w-full">
                     <Button variant="default" className="w-full bg-emerald-500 hover:bg-emerald-500">
                         Assinar agora
                     </Button>
