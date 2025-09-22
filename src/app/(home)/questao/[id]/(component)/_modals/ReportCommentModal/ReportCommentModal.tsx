@@ -1,10 +1,6 @@
-import { ResponsiveModal } from "@/components/smart/ResponsiveModal/responsiveModal"
-import { Button } from "@/components/ui/button"
 import { closeModal, openModal } from "@/lib/modal-helpers";
 import NiceModal from "@ebay/nice-modal-react";
 import { ReportCommentModalProps } from "./ReportCommentModal.type";
-import { useState } from "react";
-import { Comments } from "../../CommunityComment/CommunityComment.type";
 
 
 const ReportCommentModal = NiceModal.create(({ commentId }: ReportCommentModalProps) => {

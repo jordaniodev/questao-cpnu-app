@@ -1,6 +1,6 @@
 'use client';
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Comments, CommunityCommentProps } from "./CommunityComment.type";
+import { CommunityCommentProps } from "./CommunityComment.type";
 import { Button } from "@/components/ui/button";
 import { Flag, LoaderCircle, Send } from "lucide-react";
 import { openReportCommentModal } from "../_modals/ReportCommentModal/ReportCommentModal";
@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
 import { useParams } from "next/navigation";
+import { QuestionComment } from "@/types/QuestionComment";
 
 export const CommunityComment = ({
   comments = []
@@ -23,7 +24,7 @@ export const CommunityComment = ({
 
   const loadQuestions = async () => {
 
-    const response = await fetchPrivateClient<Comments[]>(`question/${id}/comment`, {
+    const response = await fetchPrivateClient<QuestionComment[]>(`question/${id}/comment`, {
       method: 'GET',
       next: { revalidate: 60 * 60 * 24 * 30 }
     });
