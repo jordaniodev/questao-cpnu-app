@@ -3,7 +3,7 @@
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { QuestionProps } from "./index.type";
 import { Button } from "@/components/ui/button";
-import { BookCheck, CircleCheck, CircleOff, LoaderCircle } from "lucide-react";
+import { BookCheck, CircleCheck, CircleOff, Flag, LoaderCircle } from "lucide-react";
 import { useMemo, useState } from "react";
 import { Alternative } from "@/types/Alternative";
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
@@ -13,7 +13,9 @@ import { useAuth } from "@clerk/nextjs";
 import { useAuthModal } from "@/app/(components)/AuthModal/index.hook";
 import { Question as QuestionType } from "@/types/Question";
 import { Ads } from "@/types/Ads";
-import { AdsModal } from "../AdsModal";
+import { AdsModal } from "../_modals/AdsModal";
+import { openComplaintModal } from "../_modals/ComplaintModal/ComplaintModal";
+import { CommunityComment } from "../CommunityComment/CommunityComment";
 
 export const Question = ({ question }: QuestionProps) => {
     const fetchPrivateClient = usePrivateFetch();
@@ -28,14 +30,13 @@ export const Question = ({ question }: QuestionProps) => {
     const [ads, setAds] = useState<Ads>();
 
     const choiceAlternative = async (alternative: Alternative) => {
-        if(!alternativeWasConfirmed)
+        if (!alternativeWasConfirmed)
             setAlternativeSelected(alternative);
     }
 
     const cssClassCTA = () => {
-        if(isLoading || !alternativeWasSelected) return "bg-gray-200 text-gray-500 cursor-not-allowed";
-
-        if(alternativeSelected && !alternativeWasConfirmed) return "bg-[#E0E7FF] text-primary";
+        if (isLoading || !alternativeWasSelected) return "bg-gray-200 text-gray-500 cursor-not-allowed";
+        if (alternativeSelected && !alternativeWasConfirmed) return "bg-[#E0E7FF] text-primary";
 
         return "";
     }
@@ -43,20 +44,34 @@ export const Question = ({ question }: QuestionProps) => {
 
     const cssClassAlternative = (alternative: Alternative) => {
 
-    const classWrong = " border-red-600 border bg-red-50 text-red-600 font-bold";
-    const classCorrect = " border-emerald-500 border bg-emerald-50 text-emerald-500 font-bold";
-    const classSelected = " border-primary border bg-[#E0E7FF] text-primary font-bold";
+        const classWrong = " border-red-600 border bg-red-50 text-red-600 font-bold";
+        const classCorrect = " border-emerald-500 border bg-emerald-50 text-emerald-500 font-bold";
+        const classSelected = " border-primary border bg-[#E0E7FF] text-primary font-bold";
 
         if (alternativeSelected?.id === alternative.id) {
-            if(!alternativeWasConfirmed) return classSelected;
+            if (!alternativeWasConfirmed) return classSelected;
 
-            if(alternativeSelected.correctAnswer) return classCorrect;
+            if (alternativeSelected.correctAnswer) return classCorrect;
 
             return classWrong;
         }
 
         return '';
     }
+
+    const cssClassBadge = (alternative: Alternative) => {
+        const classWrong = "bg-[var(--custom-error)] text-white";
+        const classCorrect = "bg-[var(--custom-success)] text-white";
+        const classSelected = "bg-primary text-white";
+
+        if (alternativeSelected?.id === alternative.id) {
+            if (!alternativeWasConfirmed) return classSelected;
+            if (alternativeSelected.correctAnswer) return classCorrect;
+            return classWrong;
+        }
+
+        return "bg-sidebar-accent text-muted-foreground";
+    };
 
 
     const sendAnswer = async () => {
@@ -71,17 +86,17 @@ export const Question = ({ question }: QuestionProps) => {
             });
 
             setAlternativeWasConfirmed(true);
-        }catch(error){
+        } catch (error) {
             console.error(error);
-        }finally {
+        } finally {
             setIsLoading(false);
         }
     }
 
     const continuarHandle = async () => {
         setIsLoading(true);
-        if(!alternativeWasConfirmed && alternativeSelected)
-                return sendAnswer();
+        if (!alternativeWasConfirmed && alternativeSelected)
+            return sendAnswer();
 
         if (!alternativeSelected) return;
 
@@ -92,15 +107,14 @@ export const Question = ({ question }: QuestionProps) => {
         const topicId = choiceType === 'block' ? question.topic.block.id : question.topicId;
         const newQuestion = await fetchPrivateClient<{ question: QuestionType, ads?: Ads }>(`question/draw/${choiceType}/${topicId}?questionType=${tipoQuestao}`);
 
-        if(newQuestion.ads){
+        if (newQuestion.ads) {
             setAds(newQuestion.ads);
             setNewQuestion(newQuestion.question);
-        }else {
+        } else {
             router.replace(`/questao/${newQuestion.question.id}?choiceType=${choiceType}&tipoQuestao=${tipoQuestao}`);
         }
 
     }
-
 
     const { isLoaded, isSignedIn } = useAuth();
     const { openModal } = useAuthModal();
@@ -133,41 +147,61 @@ export const Question = ({ question }: QuestionProps) => {
                     />
 
                     <div className="flex flex-col gap-[8px]">
-                        {question.alternatives.map((alternative, index) => (
-                            <Card key={index} onClick={() => choiceAlternative(alternative)} className={"mb-2" + cssClassAlternative(alternative)}>
-                                <CardContent>
-                                    <CardTitle
-                                        className="flex items-center justify-between text-[12px] leading-[16px]"
-                                        dangerouslySetInnerHTML={{ __html: alternative.description }}
-                                    />
-                                </CardContent>
-                            </Card>
-                        ))}
+                        {question.alternatives.map((alternative, index) => {
+                            const letter = String.fromCharCode(65 + index);
+
+                            return (
+                                <Card
+                                    key={alternative.id}
+                                    onClick={() => choiceAlternative(alternative)}
+                                    className={"mb-2" + cssClassAlternative(alternative)}
+                                >
+                                    <CardContent>
+                                        <CardTitle className="flex items-center gap-2 text-[12px] leading-[16px]">
+                                            <div
+                                                className={`${cssClassBadge(alternative)} rounded-sm min-w-5 min-h-5 items-center flex  justify-center`}
+                                            >
+                                                <p className="text-xs font-extrabold leading-0">
+                                                    {letter}
+                                                </p>
+                                            </div>
+
+                                            <span dangerouslySetInnerHTML={{ __html: alternative.description }} />
+                                        </CardTitle>
+                                    </CardContent>
+                                </Card>
+                            );
+                        })}
                     </div>
-                    <footer className="fixed w-full py-[20px] flex items-center justify-center bottom-[0px] left-0 z-3 bg-white border-t border-border ">
+                    <footer className="fixed w-full py-[20px] flex items-center justify-center bottom-[0px] left-0 z-3 bg-background border-t border-border ">
                         <div className="px-[16px] flex flex-col gap-2 sm:flex-row sm:justify-end sm:max-w-[800px] w-full">
-                            <div className={(alternativeWasConfirmed ? "justify-between" : "justify-end") + " flex flex-1"}>
-                                {alternativeWasConfirmed && <>
-                                    {alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
-                                        <CircleCheck className="text-emerald-500" />
-                                        Correta
-                                    </Button>}
-                                    {!alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
-                                        <CircleOff className="text-red-600" />
-                                        Incorreta
-                                    </Button>}
-                                </>}
-                                <DrawerTrigger disabled={!alternativeWasConfirmed}>
-                                    <Button
-                                        variant={'ghost'}
-                                        className={(!alternativeWasConfirmed ? "text-gray-500 cursor-not-allowed" : "text-primary")}
-                                        disabled={!alternativeWasConfirmed}
-                                    >
-                                        <BookCheck />
-                                        Ver justificativa
+                            <div className="flex-1">
+                                <div className="flex flex-1 justify-between md:justify-normal">
+                                    {alternativeWasConfirmed && <>
+                                        {alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
+                                            <CircleCheck className="text-emerald-500" />
+                                            Correta
+                                        </Button>}
+                                        {!alternativeSelected?.correctAnswer && <Button variant={'ghost'}>
+                                            <CircleOff className="text-red-600" />
+                                            Incorreta
+                                        </Button>}
+                                    </>}
+                                    <Button variant={'ghost'} className="text-muted-foreground" onClick={openComplaintModal} >
+                                        <Flag />
                                     </Button>
-                                </DrawerTrigger>
+                                </div>
                             </div>
+                            <DrawerTrigger disabled={!alternativeWasConfirmed}>
+                                <Button
+                                    variant={'ghost'}
+                                    className={(!alternativeWasConfirmed ? "text-gray-500 cursor-not-allowed" : "text-primary")}
+                                    disabled={!alternativeWasConfirmed}
+                                >
+                                    <BookCheck />
+                                    justificativa e comentários
+                                </Button>
+                            </DrawerTrigger>
                             <Button
                                 // className={"min-w-[120px] w-full sm:w-auto" + (alternativeWasSelected ? " bg-gray-200 text-gray-500 cursor-not-allowed" : (alternativeSelected.correctAnswer ? " bg-emerald-500" : " bg-red-600"))}
                                 className={"min-w-[120px] w-full sm:w-auto " + cssClassCTA()}
@@ -182,13 +216,16 @@ export const Question = ({ question }: QuestionProps) => {
                     </footer>
                 </div>
                 <DrawerContent>
-                    <DrawerHeader className="p-[32px]">
-                        <DrawerTitle className="max-w-[800px] text-left mx-auto">Justificativa</DrawerTitle>
-                        <DrawerDescription className="max-w-[800px] text-left mx-auto" dangerouslySetInnerHTML={{ __html: question.comment! }}></DrawerDescription>
+                    <DrawerHeader className="max-w-[800px] mx-auto">
+                        <DrawerTitle className="text-left">Justificativa</DrawerTitle>
+                        <DrawerDescription className="text-left mx-auto max-h-[200px] overflow-auto" dangerouslySetInnerHTML={{ __html: question.comment! }}></DrawerDescription>
+                    </DrawerHeader>
+                    <DrawerHeader className="max-w-[800px] w-full  mx-auto">
+                        <DrawerTitle className="text-left">Comentários da comunidade <span className=" text-muted-foreground font-light">( {question.questionComments?.length ?? 0} )</span></DrawerTitle>
+                        <CommunityComment comments={question.questionComments} />
                     </DrawerHeader>
                 </DrawerContent>
             </Drawer>
-
             {ads && newQuestion && <AdsModal question={newQuestion} ads={ads} />}
         </>)
 }

@@ -1,8 +1,10 @@
+
 import { Alternative } from "./Alternative";
 import { QuestionAnswered } from "./QuestionAnswered";
 import { Subtopic } from "./Subtopic";
 import { TestQuestion } from "./TestQuestion";
 import { Topic } from "./Topic";
+import { QuestionComment } from "./QuestionComment";
 
 export interface Question {
   id: number;
@@ -17,4 +19,5 @@ export interface Question {
   topic: Topic;
   testQuestions: TestQuestion[];
   questionAnswereds: QuestionAnswered[];
+  questionComments: QuestionComment[];
 }

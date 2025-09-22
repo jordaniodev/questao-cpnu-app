@@ -3,6 +3,7 @@ import { QuestionAnswered } from "./QuestionAnswered";
 
 export interface User {
   id: number;
+  planValidUntil: string;
   createdAt: Date;
   email: string | null;
   phone: string | null;

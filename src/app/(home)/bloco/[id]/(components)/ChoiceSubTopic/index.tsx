@@ -1,11 +1,11 @@
 'use client';
 
-import { ChevronRight, SearchIcon } from "lucide-react";
+import { ChevronRight, LoaderCircle, SearchIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardAction, CardContent, CardTitle } from "@/components/ui/card";
 import { ChoiceTopicProps } from "./index.type";
 
-import React from "react";
+import React, { useState } from "react";
 import { useRouter, useSearchParams } from 'next/navigation'
 import { usePrivateFetch } from "@/lib/fetchPrivateClient";
 import { Question } from "@/types/Question";
@@ -19,6 +19,7 @@ export const ChoiceSubTopics = ({ topics }: ChoiceTopicProps) => {
     const fetchPrivate = usePrivateFetch();
     const searchParams = useSearchParams();
     const tipoQuestao = searchParams.get('tipoQuestao');
+    const [isLoadingTopicId, setIsLoadingTopicId] = useState<number>(0);
 
 
     function normalizeText(text: string) {
@@ -29,12 +30,19 @@ export const ChoiceSubTopics = ({ topics }: ChoiceTopicProps) => {
     }
 
     const handleDrawQuestions = async (topicId: number) => {
-        const response = await fetchPrivate<{ question: Question, ads?: Ads }>(`question/draw/subtopic/${topicId}?questionType=${tipoQuestao}`, {
-            method: 'GET',
-            next: { revalidate: 60 * 60 * 24 * 30 }
-        });
+        try {
+            setIsLoadingTopicId(topicId)
+            const response = await fetchPrivate<{ question: Question, ads?: Ads }>(`question/draw/subtopic/${topicId}?questionType=${tipoQuestao}`, {
+                method: 'GET',
+                next: { revalidate: 60 * 60 * 24 * 30 }
+            });
 
-        push(`/questao/${response.question.id}?choiceType=subtopic&tipoQuestao=${tipoQuestao}`);
+            push(`/questao/${response.question.id}?choiceType=subtopic&tipoQuestao=${tipoQuestao}`);
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setIsLoadingTopicId(0);
+        }
 
     }
 
@@ -93,7 +101,7 @@ export const ChoiceSubTopics = ({ topics }: ChoiceTopicProps) => {
                                                 <CardTitle className="flex items-center justify-between">
                                                     <h3 className="flex items-center justify-between text-[12px] leading-[16px]">{subTopic.name}</h3>
                                                     <CardAction>
-                                                        <ChevronRight />
+                                                        {isLoadingTopicId === topic.id ? <LoaderCircle className="animate-spin" /> : <ChevronRight />}
                                                     </CardAction>
                                                 </CardTitle>
                                             </CardContent>
