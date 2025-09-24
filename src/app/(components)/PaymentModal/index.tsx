@@ -19,8 +19,8 @@ export const PaymentModal = () => {
                 <span className="px-3 py-1.5 mt-[-32px] mx-auto z-1 bg-orange-500 rounded-2xl items-center text-center justify-start text-orange-50 text-[10px] font-bold uppercase leading-[10px]">Preço por tempo limitado!</span>
                 <span className="w-full text-center text-foreground text-sm font-bold leading-none">Assinatura com questões ilimitadas até a prova (05/10/2025)</span>
                 <div className="p-6 w-full bg-sidebar-accent rounded-lg flex flex-col justify-center items-center gap-2">
-                    <span className="line-through text-foreground text-sm font-normal leading-none">R$ 59,99 </span>
-                    <span className="text-emerald-500 font-bold text-3xl leading-9">R$ 29,97</span>
+                    <span className="line-through text-foreground text-sm font-normal leading-none">R$ 29,99 </span>
+                    <span className="text-emerald-500 font-bold text-3xl leading-9">R$ 9,97</span>
                 </div>
                 <a href="https://pay.hotmart.com/R102024553L" target="_blank" className="w-full">
                     <Button variant="default" className="w-full bg-emerald-500 hover:bg-emerald-500">
