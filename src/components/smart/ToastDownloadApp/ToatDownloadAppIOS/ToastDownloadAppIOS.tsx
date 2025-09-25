@@ -5,14 +5,13 @@ import NiceModal from "@ebay/nice-modal-react";
 import { SquarePlus } from "lucide-react";
 import Image from "next/image";
 
-
 const ToastDownloadAppIOS = NiceModal.create(() => {
     return (
         <ResponsiveModal title="Instalar o aplicativo" size="md">
             <div className=" gap-4 flex flex-col mt-4">
                 <Card className="bg-accent p-4">
                     <div className="flex gap-4">
-                        <Image src="/images/logo/concurso-app-icon.svg" alt="Logo" width={48} height={48}/>
+                        <Image src="/images/logo/concurso-app-icon.svg" alt="Logo" width={48} height={48} />
                         <div className="flex flex-col gap-1">
                             <span className="text-primary text-sm font-extrabold">Concurso.app</span>
                             <span className="text-muted-foreground text-xs font-normal">Concurso.app</span>
@@ -58,7 +57,7 @@ const openToastDownloadAppIOS = () => openModal("ToastDownloadAppIOS", {});
 const closeToastDownloadAppIOS = () => closeModal("ToastDownloadAppIOS");
 
 export {
-  ToastDownloadAppIOS,
-  openToastDownloadAppIOS,
-  closeToastDownloadAppIOS,
+    ToastDownloadAppIOS,
+    openToastDownloadAppIOS,
+    closeToastDownloadAppIOS,
 };

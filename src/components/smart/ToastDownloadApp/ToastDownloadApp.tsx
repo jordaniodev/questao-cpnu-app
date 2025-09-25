@@ -6,6 +6,7 @@ import { X } from "lucide-react"
 import { useEffect, useState } from "react"
 import Image from "next/image"
 import { openToastDownloadAppIOS } from "./ToatDownloadAppIOS/ToastDownloadAppIOS"
+import { isIOS } from "react-device-detect"
 
 export type BeforeInstallPromptEvent = Event & {
   prompt: () => Promise<void>;
@@ -39,7 +40,20 @@ export const ToastDownloadApp = () => {
     setNeedOpen(false)
   }
 
+  const handleInstallClick = async () => {
+    if (isIOS) {
+      openToastDownloadAppIOS();
+      return;
+    }
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      setDeferredPrompt(null);
+    }
+  };
+
   if (!needOpens) return null;
+  
   return (
     <Card className="fixed top-4 left-1/2 -translate-x-1/2 flex items-center flex-row p-4 gap-2 w-[375px] z-50">
       <CardContent className="flex gap-3 px-0 items-center">
@@ -55,7 +69,7 @@ export const ToastDownloadApp = () => {
           Obtenha acesso rápido ao nosso aplicativo — instale-o agora no seu dispositivo.
         </CardDescription>
         <CardAction className="flex items-center justify-center self-center">
-          <Button onClick={openToastDownloadAppIOS}>
+          <Button onClick={handleInstallClick}>
             Instalar
           </Button>
         </CardAction>
